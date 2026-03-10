@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Machine Orders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background: #f7f7f7;
+        }
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+        .btn {
+            padding: 10px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            background: #1f6feb;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .logout {
+            background: #d9534f;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background: #efefef;
+        }
+        h1 {
+            margin-bottom: 8px;
+        }
+        .info {
+            margin-bottom: 18px;
+            color: #444;
+        }
+    </style>
+</head>
+<body>
+
+<div class="topbar">
+    <div>
+        <h1>Machine Orders</h1>
+        <div class="info">
+            Logged in user: <strong th:text="${username}"></strong>
+        </div>
+    </div>
+    <div>
+        <a class="btn" th:href="@{/orders/new}">Create New Order</a>
+        <form th:action="@{/logout}" method="post" style="display:inline;">
+            <button class="btn logout" type="submit">Logout</button>
+        </form>
+    </div>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Order Code</th>
+        <th>Machine Name</th>
+        <th>Owner Name</th>
+        <th>Sale Type</th>
+        <th>Visibility</th>
+        <th>Created By</th>
+        <th>Created At</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="order : ${orders}">
+        <td th:text="${order.orderCode}"></td>
+        <td th:text="${order.machineName}"></td>
+        <td th:text="${order.ownerName}"></td>
+        <td th:text="${order.saleType}"></td>
+        <td th:text="${order.visibilityType}"></td>
+        <td th:text="${order.createdBy}"></td>
+        <td th:text="${order.createdAt}"></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
